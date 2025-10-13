@@ -1,16 +1,25 @@
-"use client";
+"use client"
 
-import Image from "next/image";
-import Link from "next/link";
-import { useState } from "react";
-import Button from "@/components/ui/Button";
-import InstallPrompt from "@/components/InstallPrompt";
-import LoginTypeModal from "@/components/LoginTypeModal";
-import RegisterTypeModal from "@/components/RegisterTypeModal";
+import dynamic from "next/dynamic"
+import Image from "next/image"
+import Link from "next/link"
+import { useState } from "react"
+import Button from "@/components/ui/Button"
+
+// Dynamic import modal components (client-only)
+const InstallPrompt = dynamic(() => import("@/components/InstallPrompt"), {
+  ssr: false,
+})
+const LoginTypeModal = dynamic(() => import("@/components/LoginTypeModal"), {
+  ssr: false,
+})
+const RegisterTypeModal = dynamic(() => import("@/components/RegisterTypeModal"), {
+  ssr: false,
+})
 
 export default function WelcomePage() {
-  const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
-  const [isRegisterModalOpen, setIsRegisterModalOpen] = useState(false);
+  const [isLoginModalOpen, setIsLoginModalOpen] = useState(false)
+  const [isRegisterModalOpen, setIsRegisterModalOpen] = useState(false)
 
   return (
     <>
@@ -19,7 +28,8 @@ export default function WelcomePage() {
           {/* Headings */}
           <h1 className="text-[26px] leading-snug font-semibold">
             Ukur Dampakmu
-            <br />Ciptakan Perubahan
+            <br />
+            Ciptakan Perubahan
           </h1>
           <p className="mt-2 text-sm text-black/70">
             Platform jejak karbon untuk personal dan organisasi
@@ -37,12 +47,12 @@ export default function WelcomePage() {
             />
           </div>
 
-          {/* Actions - VERTIKAL (ATAS BAWAH) */}
-          <div className="space-y-3">
+          {/* Actions - VERTIKAL dengan gap 16px */}
+          <div className="space-y-4">
             {/* Masuk Button */}
             <Button
               size="lg"
-              className="w-full h-12"
+              fullWidth
               onClick={() => setIsLoginModalOpen(true)}
             >
               Masuk
@@ -52,7 +62,7 @@ export default function WelcomePage() {
             <Button
               variant="outline"
               size="lg"
-              className="w-full h-12 border-primary text-primary hover:bg-primary/5 focus:ring-primary/30"
+              fullWidth
               onClick={() => setIsRegisterModalOpen(true)}
             >
               Belum ada akun? Daftar dulu
@@ -80,10 +90,10 @@ export default function WelcomePage() {
         </section>
       </main>
 
-      {/* Install Prompt */}
+      {/* Install Prompt - Client Only */}
       <InstallPrompt />
 
-      {/* Modals */}
+      {/* Modals - Client Only */}
       <LoginTypeModal
         isOpen={isLoginModalOpen}
         onClose={() => setIsLoginModalOpen(false)}
@@ -93,5 +103,5 @@ export default function WelcomePage() {
         onClose={() => setIsRegisterModalOpen(false)}
       />
     </>
-  );
+  )
 }

@@ -14,12 +14,15 @@ export default function LoginTypeModal({ isOpen, onClose }: LoginTypeModalProps)
   const router = useRouter()
   const [mounted, setMounted] = useState(false)
 
-  // Prevent body scroll
   useEffect(() => {
     setMounted(true)
-    
+  }, [])
+
+  useEffect(() => {
     if (isOpen) {
       document.body.style.overflow = "hidden"
+    } else {
+      document.body.style.overflow = "unset"
     }
     
     return () => {
@@ -32,20 +35,34 @@ export default function LoginTypeModal({ isOpen, onClose }: LoginTypeModalProps)
     onClose()
   }
 
-  if (!isOpen || !mounted) return null
+  if (!mounted || !isOpen) return null
 
   const modalContent = (
-    <div className="fixed inset-0 z-[9999] flex items-center justify-center px-4">
-      {/* Backdrop */}
+    <div 
+      className="fixed inset-0 z-[9999] flex items-center justify-center px-4"
+      style={{
+        position: 'fixed',
+        top: 0,
+        left: 0,
+        right: 0,
+        bottom: 0,
+        zIndex: 9999,
+        backgroundColor: 'rgba(0, 0, 0, 0.6)',
+        backdropFilter: 'blur(4px)',
+        WebkitBackdropFilter: 'blur(4px)',
+      }}
+      onClick={onClose}
+    >
+      {/* Modal Content */}
       <div 
-        className="absolute inset-0 bg-black/50 backdrop-blur-sm" 
-        onClick={onClose}
-        aria-hidden="true"
-      />
-      
-      {/* Modal */}
-      <div className="relative bg-white rounded-2xl p-6 w-full max-w-[380px] shadow-2xl animate-in fade-in zoom-in-95 duration-200">
-        <h2 className="text-lg font-semibold text-center mb-6">
+        className="relative bg-white rounded-2xl p-6 w-full max-w-[380px] shadow-2xl animate-in fade-in zoom-in-95 duration-200"
+        style={{
+          position: 'relative',
+          zIndex: 10,
+        }}
+        onClick={(e) => e.stopPropagation()}
+      >
+        <h2 className="text-lg font-semibold text-center mb-6 text-black">
           Masuk sebagai apa?
         </h2>
 
@@ -84,5 +101,6 @@ export default function LoginTypeModal({ isOpen, onClose }: LoginTypeModalProps)
     </div>
   )
 
-  return createPortal(modalContent, document.getElementById("modal-root")!)
+  const portalRoot = document.getElementById("modal-root")
+  return portalRoot ? createPortal(modalContent, portalRoot) : null
 }

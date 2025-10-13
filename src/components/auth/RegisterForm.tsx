@@ -34,7 +34,7 @@ function RegisterFormContent() {
 
     setTimeout(() => {
       console.log("Register:", { phone: phoneNumber, type })
-      router.push(`/verify?phone=${phoneNumber}&type=${type}&action=register`)
+      router.push(`/activate?phone=${phoneNumber}&type=${type}&action=register`)
       setIsLoading(false)
     }, 1000)
   }

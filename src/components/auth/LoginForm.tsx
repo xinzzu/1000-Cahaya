@@ -34,7 +34,7 @@ function LoginFormContent() {
 
     setTimeout(() => {
       console.log("Login:", { phone: phoneNumber, type })
-      router.push(`/verify?phone=${phoneNumber}&type=${type}`)
+      router.push(`/activate?phone=${phoneNumber}&type=${type}`)
       setIsLoading(false)
     }, 1000)
   }

@@ -61,9 +61,10 @@ export default function EnergiListrikPage() {
         </div>
 
         {/* Q1: sumber listrik */}
-        <p className="mt-6 text-sm font-medium ">
-          Darimana sumber energi listrik rumah tanggamu?
+        <p className="mt-6 text-sm font-medium  [text-wrap:balance]">
+          {"Darimana sumber energi listrik rumah tangga?"}
         </p>
+
         <div
           className="mt-3 grid grid-cols-2 gap-3"
           role="radiogroup"

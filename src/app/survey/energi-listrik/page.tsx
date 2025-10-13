@@ -26,11 +26,17 @@ export default function EnergiListrikPage() {
   const [source, setSource] = useState<Source | null>(null);
   const [daya, setDaya] = useState<string>(""); // "" = belum dipilih
   const [bill, setBill] = useState<string>("0"); // rupiah (angka saja)
+  const digitsOnly = (v: string) => v.replace(/[^\d]/g, "");
+  const stripLeadingZeros = (v: string) => v.replace(/^0+(?=\d)/, "");
+  const formatIDR = (raw: string) =>
+    raw === "" ? "0" : new Intl.NumberFormat("id-ID").format(Number(raw));
+
+  const [billRaw, setBillRaw] = useState<string>("0"); // angka tanpa titik
 
   const canNext = useMemo(() => {
-    const b = Number(bill);
+    const b = Number(billRaw);
     return !!source && !!daya && Number.isFinite(b) && b > 0;
-  }, [source, daya, bill]);
+  }, [source, daya, billRaw]);
 
   function onSubmit(e: React.FormEvent) {
     e.preventDefault();
@@ -55,11 +61,11 @@ export default function EnergiListrikPage() {
         </div>
 
         {/* Q1: sumber listrik */}
-        <p className="mt-6 text-sm font-medium">
+        <p className="mt-6 text-sm font-medium ">
           Darimana sumber energi listrik rumah tanggamu?
         </p>
         <div
-          className="mt-3 grid grid-cols-2 gap-0"
+          className="mt-3 grid grid-cols-2 gap-3"
           role="radiogroup"
           aria-label="Sumber listrik"
         >
@@ -68,12 +74,14 @@ export default function EnergiListrikPage() {
             iconSrc="/pln.png" // taruh icon di /public/pln.png
             selected={source === "pln"}
             onClick={() => setSource("pln")}
+            className="w-full h-[80px]"
           />
           <SelectCard
             label="Energi Bersih"
             iconSrc="/renewable.png" // taruh icon /public/renewable.png
             selected={source === "bersih"}
             onClick={() => setSource("bersih")}
+            className="w-full h-[80px]"
           />
         </div>
 
@@ -112,15 +120,14 @@ export default function EnergiListrikPage() {
             type="text"
             inputMode="numeric"
             pattern="\d*"
-            value={bill}
+            value={formatIDR(billRaw)} // ⟵ tampilkan dengan titik
             onFocus={(e) => e.currentTarget.select()}
             onChange={(e) => {
-              const raw = onlyDigits(e.target.value);
-              const cleaned = stripLeadingZeros(raw);
-              setBill(cleaned === "" ? "0" : cleaned);
+              const raw = stripLeadingZeros(digitsOnly(e.target.value));
+              setBillRaw(raw === "" ? "0" : raw);
             }}
             onBlur={() => {
-              if (!bill) setBill("0");
+              if (!billRaw) setBillRaw("0");
             }}
             onKeyDown={(e) => {
               const blocked = ["e", "E", "+", "-", ".", ","];

@@ -129,7 +129,7 @@ export default function CompleteProfileContent() {
     setTimeout(() => {
       console.log("Form submitted:", { ...formData, type, phone })
       // TODO: Navigate to dashboard or next page
-      router.push("/dashboard")
+      router.push("/onboarding") // Ganti dengan route yang sesuai
       setIsLoading(false)
     }, 1000)
   }

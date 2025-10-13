@@ -4,8 +4,8 @@ import { useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
 import Button from "@/components/ui/Button";
 import TextField from "@/components/ui/TextField";
-import SelectCard from "@/components/ui/SelectCard";
-import ProgressBar from "@/components/ui/ProgressBar";
+import SelectCard from "@/components/ui/survey/SelectCard";
+import ProgressBar from "@/components/ui/survey/ProgressBar";
 
 type Source = "pln" | "bersih";
 
@@ -18,18 +18,15 @@ const DAYA_OPTS = [
   "≥ 6600 VA",
 ] as const;
 
-const onlyDigits = (v: string) => v.replace(/[^\d]/g, "");
-const stripLeadingZeros = (v: string) => v.replace(/^0+(?=\d)/, "");
-
 export default function EnergiListrikPage() {
   const router = useRouter();
   const [source, setSource] = useState<Source | null>(null);
   const [daya, setDaya] = useState<string>(""); // "" = belum dipilih
   const [bill, setBill] = useState<string>("0"); // rupiah (angka saja)
-  const digitsOnly = (v: string) => v.replace(/[^\d]/g, "");
-  const stripLeadingZeros = (v: string) => v.replace(/^0+(?=\d)/, "");
-  const formatIDR = (raw: string) =>
-    raw === "" ? "0" : new Intl.NumberFormat("id-ID").format(Number(raw));
+const digitsOnly = (v: string) => v.replace(/[^\d]/g, "")
+const stripLeadingZeros = (v: string) => v.replace(/^0+(?=\d)/, "")
+const formatIDR = (raw: string) =>
+  raw === "" ? "0" : new Intl.NumberFormat("id-ID").format(Number(raw))
 
   const [billRaw, setBillRaw] = useState<string>("0"); // angka tanpa titik
 
@@ -43,7 +40,7 @@ export default function EnergiListrikPage() {
     if (!canNext) return;
     // TODO: commit/kirim ke server
     // payload contoh: { source, daya, avgBill: Number(bill) }
-    router.push("/survey/akhir"); // ganti ke step berikutnya
+    router.push("/survey/limbah-sampah"); // ganti ke step berikutnya
   }
 
   return (
@@ -62,10 +59,8 @@ export default function EnergiListrikPage() {
 
         {/* Q1: sumber listrik */}
         <p className="mt-6 text-sm font-medium text-justify [text-wrap:balance] sm:[text-wrap:pretty]">
-  {"Darimana sumber energi listrik rumah\u00A0tanggamu?"}
-</p>
-
-
+          {"Darimana sumber energi listrik rumah\u00A0tangga?"}
+        </p>
         <div
           className="mt-3 grid grid-cols-2 gap-3"
           role="radiogroup"
@@ -117,29 +112,28 @@ export default function EnergiListrikPage() {
           Berapa rata-rata tagihan listrik bulananmu?
         </p>
         <div className="mt-2 flex items-center gap-2">
-          <span className="text-sm">Rp</span>
-          <TextField
-            type="text"
-            inputMode="numeric"
-            pattern="\d*"
-            value={formatIDR(billRaw)} // ⟵ tampilkan dengan titik
-            onFocus={(e) => e.currentTarget.select()}
-            onChange={(e) => {
-              const raw = stripLeadingZeros(digitsOnly(e.target.value));
-              setBillRaw(raw === "" ? "0" : raw);
-            }}
-            onBlur={() => {
-              if (!billRaw) setBillRaw("0");
-            }}
-            onKeyDown={(e) => {
-              const blocked = ["e", "E", "+", "-", ".", ","];
-              if (blocked.includes(e.key)) e.preventDefault();
-            }}
-            placeholder="0"
-            fieldSize="lg"
-            className="flex-1 min-w-0"
-          />
-        </div>
+    <span className="text-sm">Rp</span>
+    <TextField
+      type="text"
+      inputMode="numeric"          // biar keyboard numerik
+      /* pattern dihapus */         // <-- HAPUS pattern="\d*"
+      value={formatIDR(billRaw)}    // tampilkan 500.000
+      onFocus={(e) => e.currentTarget.select()}
+      onChange={(e) => {
+        const raw = stripLeadingZeros(digitsOnly(e.target.value))
+        setBillRaw(raw === "" ? "0" : raw)
+      }}
+      onBlur={() => { if (!billRaw) setBillRaw("0") }}
+      onKeyDown={(e) => {
+        // boleh blokir input manual titik/koma, karena kita format sendiri
+        const blocked = ["e", "E", "+", "-", ".", ","]
+        if (blocked.includes(e.key)) e.preventDefault()
+      }}
+      placeholder="0"
+      fieldSize="lg"
+      className="flex-1 min-w-0"
+    />
+  </div>
 
         {/* spacer + CTA */}
         <div className="fixed inset-x-0 bottom-4 px-4 z-50">

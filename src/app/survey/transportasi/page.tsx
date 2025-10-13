@@ -4,9 +4,9 @@ import { useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
 import Button from "@/components/ui/Button";
 import TextField from "@/components/ui/TextField";
-import SelectCard from "@/components/ui/SelectCard";
-import SelectPill from "@/components/ui/SelectPill";
-import ProgressBar from "@/components/ui/ProgressBar";
+import SelectCard from "@/components/ui/survey/SelectCard";
+import SelectPill from "@/components/ui/survey/SelectPill";
+import ProgressBar from "@/components/ui/survey/ProgressBar";
 
 type Vehicle = "mobil" | "motor" | "bus";
 type Fuel = "bensin" | "solar" | "listrik";

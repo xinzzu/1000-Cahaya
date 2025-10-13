@@ -1,103 +1,97 @@
+"use client";
+
 import Image from "next/image";
+import Link from "next/link";
+import { useState } from "react";
+import Button from "@/components/ui/Button";
+import InstallPrompt from "@/components/InstallPrompt";
+import LoginTypeModal from "@/components/LoginTypeModal";
+import RegisterTypeModal from "@/components/RegisterTypeModal";
 
-export default function Home() {
+export default function WelcomePage() {
+  const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
+  const [isRegisterModalOpen, setIsRegisterModalOpen] = useState(false);
+
   return (
-    <div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="font-mono list-inside list-decimal text-sm/6 text-center sm:text-left">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] font-mono font-semibold px-1 py-0.5 rounded">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
+    <>
+      <main className="min-h-dvh grid place-items-center bg-white text-black px-5">
+        <section className="w-full max-w-sm text-center">
+          {/* Headings */}
+          <h1 className="text-[26px] leading-snug font-semibold">
+            Ukur Dampakmu
+            <br />Ciptakan Perubahan
+          </h1>
+          <p className="mt-2 text-sm text-black/70">
+            Platform jejak karbon untuk personal dan organisasi
+          </p>
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
+          {/* Illustration */}
+          <div className="mt-8 mb-10">
             <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
+              src="/carbon-illustration.png"
+              alt="Ilustrasi energi hijau dan jejak karbon"
+              width={360}
+              height={260}
+              className="mx-auto h-auto w-full max-w-[360px]"
+              priority
             />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
-        </div>
+          </div>
+
+          {/* Actions - VERTIKAL (ATAS BAWAH) */}
+          <div className="space-y-3">
+            {/* Masuk Button */}
+            <Button
+              size="lg"
+              className="w-full h-12"
+              onClick={() => setIsLoginModalOpen(true)}
+            >
+              Masuk
+            </Button>
+
+            {/* Daftar Button */}
+            <Button
+              variant="outline"
+              size="lg"
+              className="w-full h-12 border-primary text-primary hover:bg-primary/5 focus:ring-primary/30"
+              onClick={() => setIsRegisterModalOpen(true)}
+            >
+              Belum ada akun? Daftar dulu
+            </Button>
+          </div>
+
+          {/* Terms */}
+          <p className="mt-6 text-xs text-black/60">
+            Dengan masuk atau mendaftar, kamu menyetujui{" "}
+            <Link
+              href="/terms"
+              className="font-semibold text-primary hover:underline"
+            >
+              Syarat &amp; Ketentuan
+            </Link>{" "}
+            dan{" "}
+            <Link
+              href="/privacy"
+              className="font-semibold text-primary hover:underline"
+            >
+              Kebijakan Privasi
+            </Link>{" "}
+            yang berlaku.
+          </p>
+        </section>
       </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
+
+      {/* Install Prompt */}
+      <InstallPrompt />
+
+      {/* Modals */}
+      <LoginTypeModal
+        isOpen={isLoginModalOpen}
+        onClose={() => setIsLoginModalOpen(false)}
+      />
+      <RegisterTypeModal
+        isOpen={isRegisterModalOpen}
+        onClose={() => setIsRegisterModalOpen(false)}
+      />
+    </>
   );
 }

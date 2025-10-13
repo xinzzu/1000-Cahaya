@@ -52,7 +52,7 @@ export default function TransportasiIndividuPage() {
           beraktivitas?
         </p>
         <div
-          className="mt-3 grid grid-cols-3 gap-3"
+          className="mt-3 grid grid-cols-3 gap-8"
           role="radiogroup"
           aria-label="Jenis kendaraan"
         >

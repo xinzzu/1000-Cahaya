@@ -20,8 +20,8 @@ export default function SelectCard({
       aria-checked={!!selected}
       onClick={onClick}
       className={twMerge(
-        "w-[116px] h-[110px] rounded-2xl border transition",
-        "flex flex-col items-center justify-center gap-1 px-3",
+        "w-[108px] h-[110px] rounded-2xl border transition",
+        "flex flex-col items-center justify-center gap-2 px-3",
         "focus:outline-none focus:ring-2",
         selected
           ? "bg-[var(--color-secondary)]" // dipilih → hijau muda

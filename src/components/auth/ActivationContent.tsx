@@ -1,12 +1,18 @@
 "use client"
 
-import { useRouter } from "next/navigation"
+import { useRouter, useSearchParams } from "next/navigation"
 import { useState, useEffect } from "react"
 import Image from "next/image"
 import Button from "@/components/ui/Button"
 
 export default function ActivationContent() {
   const router = useRouter()
+  const searchParams = useSearchParams()
+  
+  // ✅ FIX: Ambil type dan phone dari query params
+  const type = searchParams?.get("type") || "individu"
+  const phone = searchParams?.get("phone") || ""
+
   const [mounted, setMounted] = useState(false)
   const [countdown, setCountdown] = useState(59)
 
@@ -33,8 +39,8 @@ export default function ActivationContent() {
 
   const handleActivationClick = () => {
     console.log("Klik link aktivasi")
-    // TODO: Navigate to next page after activation
-    router.push("/onboarding") // Ganti dengan route yang sesuai
+    // ✅ FIX: Navigate dengan type yang sudah terdefinisi
+    router.push(`/complete-profile?type=${type}&phone=${phone}`)
   }
 
   const handleResend = () => {

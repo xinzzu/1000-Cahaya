@@ -30,8 +30,13 @@ export default function RegisterTypeModal({ isOpen, onClose }: RegisterTypeModal
     }
   }, [isOpen])
 
-  const handleSelect = (type: "individu" | "lembaga") => {
-    router.push(`/register?type=${type}`)
+  // ✅ UPDATE: Routing yang benar
+  const handleSelect = (selectedType: string) => {
+    if (selectedType === "lembaga") {
+      router.push("/institution-register")
+    } else {
+      router.push("/register-individu")
+    }
     onClose()
   }
 

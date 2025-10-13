@@ -3,8 +3,8 @@
 import dynamic from "next/dynamic"
 
 // Dynamic import untuk menghindari hydration mismatch
-const RegisterForm = dynamic(
-  () => import("@/components/auth/RegisterForm"),
+const LoginForm = dynamic(
+  () => import("@/components/auth/forms/LoginFormIndividu"),
   {
     ssr: false, // Disable server-side rendering
     loading: () => (
@@ -15,6 +15,6 @@ const RegisterForm = dynamic(
   }
 )
 
-export default function RegisterPage() {
-  return <RegisterForm />
+export default function LoginPageIndividu() {
+  return <LoginForm />
 }

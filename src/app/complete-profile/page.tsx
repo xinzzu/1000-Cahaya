@@ -3,10 +3,10 @@
 import dynamic from "next/dynamic"
 
 // Dynamic import untuk menghindari hydration mismatch
-const LoginForm = dynamic(
-  () => import("@/components/auth/LoginForm"),
+const CompleteProfileContent = dynamic(
+  () => import("@/components/auth/CompleteProfileContent"),
   {
-    ssr: false, // Disable server-side rendering
+    ssr: false,
     loading: () => (
       <div className="min-h-dvh grid place-items-center bg-white">
         <div className="text-center text-black/60">Memuat...</div>
@@ -15,6 +15,6 @@ const LoginForm = dynamic(
   }
 )
 
-export default function LoginPage() {
-  return <LoginForm />
+export default function CompleteProfilePage() {
+  return <CompleteProfileContent />
 }

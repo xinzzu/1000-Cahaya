@@ -30,11 +30,14 @@ export default function LoginTypeModal({ isOpen, onClose }: LoginTypeModalProps)
     }
   }, [isOpen])
 
-  const handleSelect = (type: "individu" | "lembaga") => {
-    router.push(`/login?type=${type}`)
-    onClose()
+  const handleSelect = (selectedType: string) => {
+    if (selectedType === "lembaga") {
+      router.push("/institution-login")
+    } else {
+      router.push("/login-individu")
+    }
+    onClose()  // ✅ Tutup modal setelah pilih
   }
-
   if (!mounted || !isOpen) return null
 
   const modalContent = (

@@ -7,10 +7,10 @@ import PhoneInput from "@/components/ui/PhoneInput"
 import Divider from "@/components/ui/Divider"
 import AuthLayout from "@/components/auth/AuthLayout"
 
-function RegisterFormContent() {
+function LoginFormIndividuContent() {
   const router = useRouter()
   const searchParams = useSearchParams()
-  const type = searchParams.get("type")
+  const type = searchParams?.get("type") || "individu"
 
   const [mounted, setMounted] = useState(false)
   const [phoneNumber, setPhoneNumber] = useState("")
@@ -33,14 +33,14 @@ function RegisterFormContent() {
     setIsLoading(true)
 
     setTimeout(() => {
-      console.log("Register:", { phone: phoneNumber, type })
-      router.push(`/activate?phone=${phoneNumber}&type=${type}&action=register`)
+      console.log("Login Individu:", { phone: phoneNumber, type })
+      router.push(`/activate?phone=${phoneNumber}&type=${type}`)
       setIsLoading(false)
     }, 1000)
   }
 
-  const handleGoogleRegister = () => {
-    console.log("Register dengan Google, Type:", type)
+  const handleGoogleLogin = () => {
+    console.log("Login dengan Google, Type:", type)
   }
 
   const handlePhoneChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -57,8 +57,8 @@ function RegisterFormContent() {
         showBack={false}
       >
         <div className="space-y-6">
-          <div className="h-[88px]" /> {/* PhoneInput placeholder */}
-          <div className="h-12 bg-gray-100 rounded-xl animate-pulse" /> {/* Button placeholder */}
+          <div className="h-[88px]" />
+          <div className="h-12 bg-gray-100 rounded-xl animate-pulse" />
         </div>
       </AuthLayout>
     )
@@ -95,7 +95,7 @@ function RegisterFormContent() {
 
       <Divider />
 
-      <Button variant="outline" size="lg" fullWidth onClick={handleGoogleRegister}>
+      <Button variant="outline" size="lg" fullWidth onClick={handleGoogleLogin}>
         <div className="flex items-center justify-center gap-3">
           <svg width="20" height="20" viewBox="0 0 48 48">
             <path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/>
@@ -110,10 +110,11 @@ function RegisterFormContent() {
   )
 }
 
-export default function RegisterForm() {
+// ✅ FIX: Export dengan nama yang benar
+export default function LoginFormIndividu() {
   return (
     <Suspense fallback={null}>
-      <RegisterFormContent />
+      <LoginFormIndividuContent />
     </Suspense>
   )
 }

@@ -4,23 +4,24 @@ import { useMemo, useState } from "react"
 import Button from "@/components/ui/Button"
 import ProgressBar from "@/components/ui/survey/ProgressBar"
 import WasteItemCard from "@/components/ui/survey/WasteItemCard"
+import {useRouter} from "next/navigation"
 
 export default function LimbahSampahPage() {
   const [organic, setOrganic] = useState("0")
   const [anorganic, setAnorganic] = useState("0")
   const [hazard, setHazard] = useState("0") // B3
-
+  const router = useRouter()
   const canFinish = useMemo(() => {
     return [organic, anorganic, hazard].some(v => Number(v) > 0)
   }, [organic, anorganic, hazard])
 
   function onSubmit(e: React.FormEvent) {
     e.preventDefault()
-    if (!canFinish) return
+    if (!canFinish) return;
     // TODO: kirim payload
     // { organic: +organic, anorganic: +anorganic, hazard: +hazard }
     // lalu ke ringkasan/hasil
-    // router.push("/survey/hasil")
+    router.push("/survey/hasil");
   }
 
   return (

@@ -4,7 +4,7 @@ import dynamic from "next/dynamic"
 
 // Dynamic import untuk menghindari hydration mismatch
 const ActivationContent = dynamic(
-  () => import("@/components/auth/ActivationContent"),
+  () => import("@/components/auth/shared/ActivationContent"),
   {
     ssr: false,
     loading: () => (

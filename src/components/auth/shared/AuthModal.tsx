@@ -4,13 +4,19 @@ import { useRouter } from "next/navigation"
 import Image from "next/image"
 import { useEffect, useState } from "react"
 import { createPortal } from "react-dom"
+import { getAuthRoute, type UserType, type AuthAction } from "@/config/routes"
 
-interface LoginTypeModalProps {
+interface AuthModalProps {
   isOpen: boolean
   onClose: () => void
+  mode: AuthAction
 }
 
-export default function LoginTypeModal({ isOpen, onClose }: LoginTypeModalProps) {
+/**
+ * Generic modal for selecting user type (Individu or Institution)
+ * Used for both login and register flows
+ */
+export default function AuthModal({ isOpen, onClose, mode }: AuthModalProps) {
   const router = useRouter()
   const [mounted, setMounted] = useState(false)
 
@@ -24,49 +30,48 @@ export default function LoginTypeModal({ isOpen, onClose }: LoginTypeModalProps)
     } else {
       document.body.style.overflow = "unset"
     }
-    
+
     return () => {
       document.body.style.overflow = "unset"
     }
   }, [isOpen])
 
-  const handleSelect = (selectedType: string) => {
-    if (selectedType === "lembaga") {
-      router.push("/institution-login")
-    } else {
-      router.push("/login-individu")
-    }
-    onClose()  // ✅ Tutup modal setelah pilih
+  const handleSelect = (userType: UserType) => {
+    const route = getAuthRoute(mode, userType)
+    router.push(route)
+    onClose()
   }
+
   if (!mounted || !isOpen) return null
 
+  const title = mode === "login" ? "Masuk sebagai apa?" : "Daftar sebagai apa?"
+
   const modalContent = (
-    <div 
+    <div
       className="fixed inset-0 z-[9999] flex items-center justify-center px-4"
       style={{
-        position: 'fixed',
+        position: "fixed",
         top: 0,
         left: 0,
         right: 0,
         bottom: 0,
         zIndex: 9999,
-        backgroundColor: 'rgba(0, 0, 0, 0.6)',
-        backdropFilter: 'blur(4px)',
-        WebkitBackdropFilter: 'blur(4px)',
+        backgroundColor: "rgba(0, 0, 0, 0.6)",
+        backdropFilter: "blur(4px)",
+        WebkitBackdropFilter: "blur(4px)",
       }}
       onClick={onClose}
     >
-      {/* Modal Content */}
-      <div 
+      <div
         className="relative bg-white rounded-2xl p-6 w-full max-w-[380px] shadow-2xl animate-in fade-in zoom-in-95 duration-200"
         style={{
-          position: 'relative',
+          position: "relative",
           zIndex: 10,
         }}
         onClick={(e) => e.stopPropagation()}
       >
         <h2 className="text-lg font-semibold text-center mb-6 text-black">
-          Masuk sebagai apa?
+          {title}
         </h2>
 
         <div className="grid grid-cols-2 gap-4">
@@ -74,6 +79,7 @@ export default function LoginTypeModal({ isOpen, onClose }: LoginTypeModalProps)
           <button
             onClick={() => handleSelect("individu")}
             className="flex flex-col items-center justify-center gap-3 p-6 border-2 border-primary/20 rounded-xl hover:border-primary hover:bg-primary/5 transition-all duration-200 active:scale-95"
+            aria-label="Pilih Individu"
           >
             <Image
               src="/Individu.svg"
@@ -85,10 +91,11 @@ export default function LoginTypeModal({ isOpen, onClose }: LoginTypeModalProps)
             <span className="text-sm font-medium text-black">Individu</span>
           </button>
 
-          {/* Lembaga Button */}
+          {/* Institution Button */}
           <button
-            onClick={() => handleSelect("lembaga")}
+            onClick={() => handleSelect("institution")}
             className="flex flex-col items-center justify-center gap-3 p-6 border-2 border-primary/20 rounded-xl hover:border-primary hover:bg-primary/5 transition-all duration-200 active:scale-95"
+            aria-label="Pilih Lembaga"
           >
             <Image
               src="/Building.svg"

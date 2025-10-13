@@ -10,10 +10,9 @@ import Button from "@/components/ui/Button"
 const InstallPrompt = dynamic(() => import("@/components/InstallPrompt"), {
   ssr: false,
 })
-const LoginTypeModal = dynamic(() => import("@/components/LoginTypeModal"), {
-  ssr: false,
-})
-const RegisterTypeModal = dynamic(() => import("@/components/RegisterTypeModal"), {
+
+// ✅ NEW: Import generic AuthModal (menggantikan 2 modal terpisah)
+const AuthModal = dynamic(() => import("@/components/auth/shared/AuthModal"), {
   ssr: false,
 })
 
@@ -93,14 +92,16 @@ export default function WelcomePage() {
       {/* Install Prompt - Client Only */}
       <InstallPrompt />
 
-      {/* Modals - Client Only */}
-      <LoginTypeModal
+      {/* ✅ NEW: Generic Auth Modals - Menggantikan LoginTypeModal & RegisterTypeModal */}
+      <AuthModal
         isOpen={isLoginModalOpen}
         onClose={() => setIsLoginModalOpen(false)}
+        mode="login"
       />
-      <RegisterTypeModal
+      <AuthModal
         isOpen={isRegisterModalOpen}
         onClose={() => setIsRegisterModalOpen(false)}
+        mode="register"
       />
     </>
   )

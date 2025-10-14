@@ -3,7 +3,8 @@
 
 import Link from "next/link"
 import { usePathname } from "next/navigation"
-import { ReactNode } from "react"
+import { useEffect, useRef, useState } from "react"
+import type { ReactNode } from "react"
 
 export type NavItem = {
   label: string
@@ -13,53 +14,58 @@ export type NavItem = {
   match?: "exact" | "startsWith"
 }
 
-type Props = {
-  items?: NavItem[]
-}
+const normalize = (p: string) => p.replace(/\/+$/, "") || "/"
+const isMatch = (pathname: string, href: string, match?: "exact" | "startsWith") =>
+  match === "exact" ? pathname === href : pathname === href || pathname.startsWith(href + "/")
 
-export default function BottomNavIndividu({ items = [] }: Props) {
-  const pathname = usePathname()
+export default function BottomNavIndividu({ items = [] as NavItem[] }) {
+  // 1) Call all hooks every render (order never changes)
+  const rawPath = usePathname()
+  const livePath = normalize(rawPath || "/")
+  const frozenPath = useRef(livePath).current
+
+  // 2) No-SSR for this widget (avoids hydration diffs)
+  const [mounted, setMounted] = useState(false)
+  useEffect(() => setMounted(true), [])
+
+  // If nothing matches on first mount, highlight index 0 (Beranda)
+  const hasActive = items.some((it) => isMatch(frozenPath, normalize(it.href), it.match))
+  const defaultActiveIndex = hasActive ? -1 : 0
+
+  // Render nothing until client mounted (but hooks still ran above)
+  if (!mounted) return null
 
   return (
     <nav
-      className="
-        fixed inset-x-0 bottom-0 z-50
-        bg-white/95 backdrop-blur supports-[backdrop-filter]:bg-white/70
-        pb-[env(safe-area-inset-bottom)]
-      "
       aria-label="Bottom navigation"
+      className="fixed inset-x-0 bottom-0 z-50 bg-white/95 backdrop-blur supports-[backdrop-filter]:bg-white/70 pb-[env(safe-area-inset-bottom)]"
     >
-      {/* lebar PWA */}
       <div className="mx-auto max-w-sm">
-        {/* border top hanya sepanjang container */}
         <div className="border-t" style={{ borderColor: "var(--color-primary)" }}>
           <ul className="grid grid-cols-5">
-            {items.map((it) => {
+            {items.map((it, idx) => {
+              const href = normalize(it.href)
               const active =
-                it.match === "exact"
-                  ? pathname === it.href
-                  : pathname === it.href || pathname.startsWith(it.href + "/")
-
+                defaultActiveIndex === idx ? true : isMatch(frozenPath, href, it.match)
               const iconNode = active && it.activeIcon ? it.activeIcon : it.icon
+              const color = active ? "var(--color-primary)" : "#000"
 
               return (
                 <li key={it.href}>
                   <Link
                     href={it.href}
-                    className="flex h-14 flex-col items-center justify-center gap-1"
+                    className="flex h-16 flex-col items-center justify-center gap-1 active:scale-[0.98] transition"
+                    aria-current={active ? "page" : undefined}
                   >
-                    {/* ikon; aktif biarkan hitam, non-aktif abu */}
-                    <span className={active ? "text-black" : "text-black/50"}>
+                    <span
+                      className="grid h-6 w-6 place-items-center shrink-0 [&>svg]:h-6 [&>svg]:w-6 [&>img]:h-6 [&>img]:w-6"
+                      style={{ color }}
+                    >
                       {iconNode}
                     </span>
-
-                    {/* label: ketebalan SAMA; aktif beda warna saja */}
                     <span
-                      className={
-                        active
-                          ? "text-[11px] leading-none font-medium text-black"
-                          : "text-[11px] leading-none font-medium text-black/60"
-                      }
+                      className="text-[11px] leading-none font-medium"
+                      style={{ color }}
                     >
                       {it.label}
                     </span>

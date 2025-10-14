@@ -30,7 +30,7 @@ export default function HomePage() {
           alt={name}
           width={40}
           height={40}
-          className="rounded-full ring-1 ring-[color:var(--color-primary)] object-cover"
+          className="rounded-full ring-1 ring-object-cover"
           priority
         />
 
@@ -43,8 +43,7 @@ export default function HomePage() {
 
         <button
           aria-label="Notifikasi"
-          className="h-9 w-9 grid place-items-center rounded-full border"
-          style={{ borderColor: "var(--color-primary)" }}
+          className="h-9 w-9 grid place-items-center "
         >
           <Image src="/icons/bells.svg" alt="" width={18} height={18} />
         </button>

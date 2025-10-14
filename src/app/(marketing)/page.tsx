@@ -93,7 +93,7 @@ export default function WelcomePage() {
       <InstallPrompt />
 
       {/* ✅ NEW: Generic Auth Modals - Menggantikan LoginTypeModal & RegisterTypeModal */}
-      <AuthModal
+      {/* <AuthModal
         isOpen={isLoginModalOpen}
         onClose={() => setIsLoginModalOpen(false)}
         mode="login"
@@ -102,7 +102,7 @@ export default function WelcomePage() {
         isOpen={isRegisterModalOpen}
         onClose={() => setIsRegisterModalOpen(false)}
         mode="register"
-      />
+      /> */}
     </>
   )
 }

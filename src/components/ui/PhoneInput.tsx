@@ -1,44 +1,75 @@
-import { ComponentPropsWithoutRef, forwardRef } from "react"
+"use client";
 
-interface PhoneInputProps extends Omit<ComponentPropsWithoutRef<"input">, "type"> {
-  label?: string
-  error?: string
-}
+import {
+  ComponentPropsWithoutRef,
+  forwardRef,
+  ReactNode,
+} from "react";
+
+type PhoneInputProps = Omit<ComponentPropsWithoutRef<"input">, "type" | "onChange"> & {
+  label?: string;
+  error?: string;
+  prefix?: string;             // default +62 (hanya tampilan)
+  leftIcon?: ReactNode;
+  rightIcon?: ReactNode;
+  onValueChange?: (value: string) => void; // handler value-only (disarankan)
+  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void; // opsional utk kompatibilitas
+};
 
 const PhoneInput = forwardRef<HTMLInputElement, PhoneInputProps>(
-  ({ label, error, className = "", ...props }, ref) => {
+  (
+    { label, error, className = "", prefix = "+62", leftIcon, rightIcon, onValueChange, ...props },
+    ref
+  ) => {
     return (
       <div className="w-full">
         {label && (
-          <label htmlFor={props.id} className="block text-sm font-medium mb-2 text-black">
+          <label htmlFor={props.id} className="mb-2 block text-sm font-medium text-black">
             {label}
           </label>
         )}
+
         <div
           className={[
-            "flex items-center gap-2 border rounded-xl px-4 py-3 transition-all",
+            "flex h-12 items-center gap-2 rounded-xl border px-4 transition-all",
             error
-              ? "border-red-500 focus-within:ring-2 focus-within:ring-red-500/30"
-              : "border-black/15 focus-within:ring-2 focus-within:ring-primary/30 focus-within:border-primary",
+              ? "border-red-500 focus-within:border-red-500 focus-within:ring-2 focus-within:ring-red-500/30"
+              : "border-black/15 focus-within:border-[color:var(--color-primary)] focus-within:ring-2 focus-within:ring-[color:var(--color-primary)]/30",
             className,
-          ]
-            .filter(Boolean)
-            .join(" ")}
+          ].join(" ")}
         >
-          <span className="text-black/60 font-medium select-none">+62</span>
+          {leftIcon && <span className="text-black/60">{leftIcon}</span>}
+
+          <span className="select-none text-sm font-medium text-black/60">
+            {prefix}
+          </span>
+
           <input
             ref={ref}
             type="tel"
-            className="flex-1 outline-none bg-transparent text-black placeholder:text-black/40"
+            inputMode="numeric"
+            pattern="\d*"
+            className="h-full flex-1 bg-transparent text-sm text-black placeholder:text-black/40 outline-none"
             {...props}
+            onChange={(e) => {
+              const digits = e.target.value.replace(/\D/g, "");
+              onValueChange?.(digits);
+              props.onChange?.({
+                ...e,
+                target: { ...e.target, value: digits },
+                currentTarget: { ...e.currentTarget, value: digits },
+              } as unknown as React.ChangeEvent<HTMLInputElement>);
+            }}
           />
+
+          {rightIcon && <span className="text-black/60">{rightIcon}</span>}
         </div>
+
         {error && <p className="mt-1 text-xs text-red-500">{error}</p>}
       </div>
-    )
+    );
   }
-)
+);
 
-PhoneInput.displayName = "PhoneInput"
-
-export default PhoneInput
+PhoneInput.displayName = "PhoneInput";
+export default PhoneInput;

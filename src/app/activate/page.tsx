@@ -1,20 +1,7 @@
-"use client"
+"use client";
 
-import dynamic from "next/dynamic"
-
-// Dynamic import untuk menghindari hydration mismatch
-const ActivationContent = dynamic(
-  () => import("@/components/auth/shared/ActivationContent"),
-  {
-    ssr: false,
-    loading: () => (
-      <div className="min-h-dvh grid place-items-center bg-white">
-        <div className="text-center text-black/60">Memuat...</div>
-      </div>
-    ),
-  }
-)
+import ActivationContent from "@/components/auth/shared/ActivationContent";
 
 export default function ActivatePage() {
-  return <ActivationContent />
+  return <ActivationContent />;
 }

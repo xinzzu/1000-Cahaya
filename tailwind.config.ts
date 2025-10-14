@@ -1,7 +1,9 @@
 import type { Config } from "tailwindcss"
 
 export default {
-  content: ["./src/**/*.{ts,tsx}"],
+  content: ["./src/**/*.{ts,tsx}",
+    "./src/components/**/*.{ts,tsx}",
+  ],
   theme: {
     extend: {
       colors: {
@@ -10,6 +12,8 @@ export default {
         danger: "var(--color-danger)",
         black: "var(--color-black)",
         white: "var(--color-white)",
+        background: "var(--color-background)",
+        backgroundCard: "var(--color-background-card)",
         gray: {
           600: "var(--color-gray-600)",
           800: "var(--color-gray-800)",

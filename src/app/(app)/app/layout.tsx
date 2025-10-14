@@ -7,7 +7,7 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
     { label: "Tantangan", href: "/app/tantangan",  iconSrc: "/icons/challenge.svg", match: "exact" },
     { label: "Catat",     href: "/app/catat",      iconSrc: "/icons/add.svg",       match: "exact" },
     { label: "Analisis",  href: "/app/analisis",   iconSrc: "/icons/chart.svg",     match: "exact" },
-    { label: "Profil",    href: "/app/profil",     iconSrc: "/icons/user.svg",      match: "exact" },
+    { label: "Profil",    href: "/app/profile",     iconSrc: "/icons/user.svg",      match: "exact" },
   ];
 
   return (

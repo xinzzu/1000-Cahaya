@@ -26,7 +26,7 @@ export default function HomePage() {
       <header className="flex items-center gap-3">
         {/* Avatar PNG */}
         <Image
-          src="/images/user.png"
+          src="/images/User.png"
           alt={name}
           width={40}
           height={40}

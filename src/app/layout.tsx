@@ -38,7 +38,7 @@ export default function RootLayout({
     <html lang="id" className={poppins.variable}>
       <body>
         {children}
-        <div id="modal-root" />
+         <div id="modal-root"></div>
       </body>
     </html>
   )

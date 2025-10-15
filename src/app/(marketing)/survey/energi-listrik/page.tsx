@@ -58,7 +58,7 @@ const formatIDR = (raw: string) =>
         </div>
 
         {/* Q1: sumber listrik */}
-        <p className="mt-6 text-sm font-medium text-justify [text-wrap:balance] sm:[text-wrap:pretty]">
+        <p className="mt-6 text-sm font-medium ">
           {"Darimana sumber energi listrik rumah\u00A0tangga?"}
         </p>
         <div

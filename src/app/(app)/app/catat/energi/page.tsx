@@ -4,9 +4,9 @@ import { useEffect, useMemo, useState } from "react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 
-import EnergySourceCard from "@/components/catat/energi/EnergySourceCard";
-import { EnergyEntry, EnergySource } from "@/components/catat/energi/types";
-import { loadEnergy, saveEnergy, clearEnergy } from "@/components/catat/energi/storage";
+import EnergySourceCard from "@/components/individu/catat/energi/EnergySourceCard";
+import { EnergyEntry, EnergySource } from "@/components/individu/catat/energi/types";
+import { loadEnergy, saveEnergy, clearEnergy } from "@/components/individu/catat/energi/storage";
 
 import Select from "@/components/ui/Select";
 import TextField from "@/components/ui/TextField";

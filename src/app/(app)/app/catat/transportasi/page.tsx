@@ -2,10 +2,10 @@
 
 import { useEffect, useMemo, useState } from "react";
 import Button from "@/components/ui/Button";
-import TransportItem from "@/components/catat/transportasi/TransportItem";
-import TransportModal from "@/components/catat/transportasi/TransportModal";
-import { loadTransport, saveTransport, clearTransport } from "@/components/catat/transportasi/storage";
-import { TransportEntry, VehicleType } from "@/components/catat/transportasi/types";
+import TransportItem from "@/components/individu/catat/transportasi/TransportItem";
+import TransportModal from "@/components/individu/catat/transportasi/TransportModal";
+import { loadTransport, saveTransport, clearTransport } from "@/components/individu/catat/transportasi/storage";
+import { TransportEntry, VehicleType } from "@/components/individu/catat/transportasi/types";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import SuccessDialog from "@/components/ui/SuccessDialog";

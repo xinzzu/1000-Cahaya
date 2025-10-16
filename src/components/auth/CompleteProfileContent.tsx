@@ -10,7 +10,6 @@ import Select from "@/components/ui/Select";
 // === Tipe Data untuk State & Mode ===
 type Mode = "individu" | "lembaga";
 
-// Tipe untuk data form individu
 type IndividuData = {
   namaLengkap: string;
   jenisKelamin: string;
@@ -20,7 +19,6 @@ type IndividuData = {
   kelurahan: string;
 };
 
-// Tipe untuk data form lembaga
 type LembagaData = {
   namaLembaga: string;
   jenisLembaga: string;
@@ -75,7 +73,6 @@ export default function CompleteProfileContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
 
-  // baca query ?type=individu|lembaga & ?phone=
   const initialType = (searchParams?.get("type") as Mode) || "individu";
   const phone = searchParams?.get("phone") || "";
 
@@ -83,7 +80,6 @@ export default function CompleteProfileContent() {
   const [isLoading, setIsLoading] = useState(false);
   const [mode, setMode] = useState<Mode>(initialType);
 
-  // ====== STATE: INDIVIDU (dengan Tipe) ======
   const [individu, setIndividu] = useState<IndividuData>({
     namaLengkap: "",
     jenisKelamin: "",
@@ -93,7 +89,6 @@ export default function CompleteProfileContent() {
     kelurahan: "",
   });
 
-  // ====== STATE: LEMBAGA (dengan Tipe) ======
   const [lembaga, setLembaga] = useState<LembagaData>({
     namaLembaga: "",
     jenisLembaga: "",
@@ -103,13 +98,11 @@ export default function CompleteProfileContent() {
     kelurahan: "",
   });
 
-  // error masing-masing mode (dengan Tipe Partial)
   const [errorsInd, setErrorsInd] = useState<Partial<IndividuData>>({});
   const [errorsOrg, setErrorsOrg] = useState<Partial<LembagaData>>({});
 
   useEffect(() => setMounted(true), []);
 
-  // ✅ HELPER DENGAN TIPE YANG BENAR (tanpa `any`)
   function setField(
     field: keyof IndividuData | keyof LembagaData,
     value: string
@@ -129,12 +122,13 @@ export default function CompleteProfileContent() {
     }
   }
 
-  // validasi sesuai mode
   function validate(): boolean {
     if (mode === "individu") {
       const e: Partial<IndividuData> = {};
-      if (!individu.namaLengkap.trim()) e.namaLengkap = "Nama lengkap wajib diisi";
-      if (!individu.jenisKelamin) e.jenisKelamin = "Jenis kelamin wajib dipilih";
+      if (!individu.namaLengkap.trim())
+        e.namaLengkap = "Nama lengkap wajib diisi";
+      if (!individu.jenisKelamin)
+        e.jenisKelamin = "Jenis kelamin wajib dipilih";
       if (!individu.provinsi) e.provinsi = "Provinsi wajib dipilih";
       if (!individu.kabupaten) e.kabupaten = "Kabupaten/Kota wajib dipilih";
       if (!individu.kecamatan) e.kecamatan = "Kecamatan wajib dipilih";
@@ -143,7 +137,8 @@ export default function CompleteProfileContent() {
       return Object.keys(e).length === 0;
     } else {
       const e: Partial<LembagaData> = {};
-      if (!lembaga.namaLembaga.trim()) e.namaLembaga = "Nama lembaga wajib diisi";
+      if (!lembaga.namaLembaga.trim())
+        e.namaLembaga = "Nama lembaga wajib diisi";
       if (!lembaga.jenisLembaga) e.jenisLembaga = "Jenis lembaga wajib dipilih";
       if (!lembaga.provinsi) e.provinsi = "Provinsi wajib dipilih";
       if (!lembaga.kabupaten) e.kabupaten = "Kabupaten/Kota wajib dipilih";
@@ -191,7 +186,10 @@ export default function CompleteProfileContent() {
           : { type: "lembaga", phone, ...lembaga };
 
       console.log("Complete profile payload:", payload);
-      router.push("/onboarding"); // arah berikutnya
+
+      // ✅ PERUBAHAN UTAMA: Arahkan ke satu halaman onboarding dengan query param
+      router.push(`/onboarding?type=${mode}`);
+      
       setIsLoading(false);
     }, 900);
   }
@@ -204,7 +202,10 @@ export default function CompleteProfileContent() {
           <div className="mb-8 h-8 w-40 animate-pulse rounded bg-gray-100" />
           <div className="space-y-6">
             {Array.from({ length: 7 }).map((_, i) => (
-              <div key={i} className="h-[72px] animate-pulse rounded-xl bg-gray-100" />
+              <div
+                key={i}
+                className="h-[72px] animate-pulse rounded-xl bg-gray-100"
+              />
             ))}
           </div>
         </div>

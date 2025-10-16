@@ -2,10 +2,10 @@
 
 import Image from "next/image"
 import Button from "@/components/ui/Button"
-import ActivityHeader from "@/components/catat/ActivityHeader"
-import CategoryCard from "@/components/catat/CategoryCard"
-import SavedActivityItem from "@/components/catat/SavedActivityItem"
-import CalculationResult from "@/components/catat/CalculationResult"
+import ActivityHeader from "@/components/individu/catat/ActivityHeader"
+import CategoryCard from "@/components/individu/catat/CategoryCard"
+import SavedActivityItem from "@/components/individu/catat/SavedActivityItem"
+import CalculationResult from "@/components/individu/catat/CalculationResult"
 
 // ✅ 1. Definisikan tipe data untuk kategori dan item tersimpan
 type Category = {

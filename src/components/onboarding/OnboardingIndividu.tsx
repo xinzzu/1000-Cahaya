@@ -4,9 +4,10 @@ import Image from "next/image"
 import { useRouter } from "next/navigation"
 import Button from "@/components/ui/Button"
 
-const NEXT_ROUTE = "/survey/transportasi"; // ganti ke tujuanmu: "/register", "/dashboard", dst.
+// Rute tujuan untuk pengguna individu
+const NEXT_ROUTE = "/survey/transportasi";
 
-export default function Onboarding() {
+export default function OnboardingIndividu() {
   const router = useRouter()
 
   return (
@@ -24,7 +25,7 @@ export default function Onboarding() {
 
         <div className="mt-8 mb-10">
           <Image
-            src="/onboarding.svg"
+            src="/onboarding.svg" 
             alt=""
             width={360}
             height={220}
@@ -34,7 +35,7 @@ export default function Onboarding() {
         </div>
 
         <Button
-          size="lg"                 // 48px (PWA-friendly)
+          size="lg"
           className="w-full sm:h-10"
           onClick={() => router.push(NEXT_ROUTE)}
         >

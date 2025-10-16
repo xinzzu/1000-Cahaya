@@ -3,8 +3,8 @@
 
 import { useMemo, useState } from "react";
 import Image from "next/image";
-import TrendChart from "@/components/analisis/TrendChart";
-import DonutChart from "@/components/analisis/DonutChart";
+import TrendChart from "@/components/individu/analisis/TrendChart";
+import DonutChart from "@/components/individu/analisis/DonutChart";
 import Button from "@/components/ui/Button";
 
 type Range = "week" | "month" | "year";

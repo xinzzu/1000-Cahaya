@@ -2,11 +2,11 @@
 
 import Image from "next/image";
 import { useRouter } from "next/navigation"; // ✅ 1. Import useRouter
-import ProfileHeaderCard from "@/components/profile/ProfileHeaderCard";
-import SectionTitle from "@/components/profile/SectionTitle";
-import BadgeCard from "@/components/profile/BadgeCard";
-import SettingRow from "@/components/profile/SettingRow";
-import LogoutBar from "@/components/profile/LogoutBar";
+import ProfileHeaderCard from "@/components/individu/profile/ProfileHeaderCard";
+import SectionTitle from "@/components/individu/profile/SectionTitle";
+import BadgeCard from "@/components/individu/profile/BadgeCard";
+import SettingRow from "@/components/individu/profile/SettingRow";
+import LogoutBar from "@/components/individu/profile/LogoutBar";
 
 export default function ProfilPage() {
   const router = useRouter(); // ✅ 2. Inisialisasi router

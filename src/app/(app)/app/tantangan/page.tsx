@@ -1,7 +1,7 @@
 "use client";
-import SectionHeader from "@/components/tantangan/SectionHeader";
-import ChallengeCard from "@/components/tantangan/ChallengeCard";
-import LeaderboardItem from "@/components/tantangan/LeaderboardItem";
+import SectionHeader from "@/components/individu/tantangan/SectionHeader";
+import ChallengeCard from "@/components/individu/tantangan/ChallengeCard";
+import LeaderboardItem from "@/components/individu/tantangan/LeaderboardItem";
 
 // ---- dummy data (nanti ganti dari API)
 const weeklyChallenge = {

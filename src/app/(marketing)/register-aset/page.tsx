@@ -2,7 +2,6 @@
 
 import { useEffect, useMemo, useState } from "react";
 import { nanoid } from "nanoid";
-import Image from "next/image";
 import { useRouter } from "next/navigation"; // Pastikan ini diimpor
 import Button from "@/components/ui/Button";
 import SuccessDialog from "@/components/ui/SuccessDialog";

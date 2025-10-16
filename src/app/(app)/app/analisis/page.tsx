@@ -70,6 +70,12 @@ export default function AnalisisPage() {
           Analisis dampak aktivitas harian Anda
         </p>
       </header>
+      {/* divider */}
+        <div
+          className="mt-4 h-[2px] w-full"
+          style={{ backgroundColor: "var(--color-primary)" }}
+        />
+
 
       {/* Tabs */}
       <div className="mt-4 grid grid-cols-3 gap-2">

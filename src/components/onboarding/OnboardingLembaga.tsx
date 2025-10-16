@@ -1,67 +1,47 @@
-"use client";
+"use client"
 
-import Link from "next/link";
-import { usePathname } from "next/navigation";
+import Image from "next/image"
+import { useRouter } from "next/navigation"
+import Button from "@/components/ui/Button"
 
-// Definisikan tipe untuk item navigasi lembaga
-export type NavItemLembaga = {
-  label: string;
-  href: string;
-  iconSrc: string; // Hanya butuh satu path ikon (ikon versi hitam/standar)
-  match?: "exact" | "startsWith";
-};
+// Rute tujuan untuk pengguna lembaga
+const NEXT_ROUTE = "/register-aset";
 
-// Komponen menerima props 'items' dari layout
-export default function BottomNavLembaga({ items = [] as NavItemLembaga[] }) {
-  const pathname = usePathname() || "/";
+export default function OnboardingLembaga() {
+  const router = useRouter()
 
   return (
-    <nav
-      aria-label="Bottom navigation"
-      className="fixed inset-x-0 bottom-0 z-50 bg-white/95 backdrop-blur supports-[backdrop-filter]:bg-white/70"
-    >
-      <div className="h-px w-full" style={{ backgroundColor: "var(--color-primary)" }} />
-      <div className="mx-auto max-w-sm">
-        <ul className="grid grid-cols-4"> {/* Disesuaikan menjadi 4 kolom */}
-          {items.map((it) => {
-            const active =
-              it.match === "exact"
-                ? pathname === it.href
-                : pathname === it.href || pathname.startsWith(it.href + "/");
+    <main className="min-h-dvh grid place-items-center bg-white text-black px-5">
+      <section className="w-full max-w-sm text-center">
+        <h1 className="text-[26px] leading-snug font-semibold whitespace-pre-line">
+          {"Selamat Datang, Lembaga Peduli Bumi!"}
+        </h1>
 
-            const color = active ? "var(--color-primary)" : "#000";
+        <p className="mt-3 text-sm text-black/70 whitespace-pre-line">
+          {"Langkah pertama adalah mendaftarkan aset Anda.\n" +
+           "Ini akan menjadi dasar untuk menghitung\n" +
+           "jejak karbon lembaga Anda."}
+        </p>
+            
+        <div className="mt-8 mb-10">
+          <Image
+            src="/onboarding.svg" // Anda bisa menggunakan gambar yang sama atau berbeda
+            alt=""
+            width={360}
+            height={220}
+            className="mx-auto h-auto w-full max-w-[360px]"
+            priority
+          />
+        </div>
 
-            return (
-              <li key={it.href}>
-                <Link
-                  href={it.href}
-                  aria-current={active ? "page" : undefined}
-                  className="flex h-16 flex-col items-center justify-center gap-1 select-none"
-                >
-                  {/* Teknik CSS Mask untuk mewarnai ikon SVG */}
-                  <span
-                    aria-hidden
-                    className="
-                      block h-6 w-6 shrink-0
-                      bg-current
-                      [mask-size:contain] [mask-position:center] [mask-repeat:no-repeat]
-                      [-webkit-mask-size:contain] [-webkit-mask-position:center] [-webkit-mask-repeat:no-repeat]
-                    "
-                    style={{
-                      color,
-                      maskImage: `url(${it.iconSrc})`,
-                      WebkitMaskImage: `url(${it.iconSrc})`,
-                    }}
-                  />
-                  <span className="text-[11px] leading-none font-medium" style={{ color }}>
-                    {it.label}
-                  </span>
-                </Link>
-              </li>
-            );
-          })}
-        </ul>
-      </div>
-    </nav>
-  );
+        <Button
+          size="lg"
+          className="w-full sm:h-10"
+          onClick={() => router.push(NEXT_ROUTE)}
+        >
+          Mulai Daftarkan Aset
+        </Button>
+      </section>
+    </main>
+  )
 }

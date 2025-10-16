@@ -1,7 +1,7 @@
 "use client"; // Diperlukan karena kita menggunakan hook dan dynamic import
 
 import dynamic from "next/dynamic";
-import Image from "next/image";
+
 import HideOnPaths from "@/components/nav/HideOnPaths";
 import type { NavItemLembaga } from "@/components/nav/BottomNavLembaga";
 

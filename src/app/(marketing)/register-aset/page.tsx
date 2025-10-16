@@ -52,7 +52,7 @@ export default function OrgAssetsPage() {
   // ✅ Fungsi untuk menangani penutupan dialog dan navigasi
   function handleSuccessAndNavigate() {
     setOk(false); // Tutup dialog
-    router.push('/lembaga/dashboard'); // Arahkan ke homepage lembaga
+    router.push('/lembaga'); // Arahkan ke homepage lembaga
   }
 
   return (

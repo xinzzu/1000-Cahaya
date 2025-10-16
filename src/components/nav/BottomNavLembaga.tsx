@@ -2,16 +2,17 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { ReactNode } from "react";
 
-// Definisikan tipe untuk item navigasi lembaga
+// Tipe untuk item navigasi lembaga. Sekarang menerima ReactNode untuk ikon.
 export type NavItemLembaga = {
   label: string;
   href: string;
-  iconSrc: string; // Hanya butuh satu path ikon (ikon versi hitam/standar)
+  iconSrc: ReactNode;
   match?: "exact" | "startsWith";
 };
 
-// Komponen menerima props 'items' dari layout
+// Komponen sekarang menerima 'items' sebagai prop dari layout
 export default function BottomNavLembaga({ items = [] as NavItemLembaga[] }) {
   const pathname = usePathname() || "/";
 
@@ -22,7 +23,7 @@ export default function BottomNavLembaga({ items = [] as NavItemLembaga[] }) {
     >
       <div className="h-px w-full" style={{ backgroundColor: "var(--color-primary)" }} />
       <div className="mx-auto max-w-sm">
-        <ul className="grid grid-cols-4"> {/* Disesuaikan menjadi 4 kolom */}
+        <ul className="grid grid-cols-4">
           {items.map((it) => {
             const active =
               it.match === "exact"
@@ -38,7 +39,7 @@ export default function BottomNavLembaga({ items = [] as NavItemLembaga[] }) {
                   aria-current={active ? "page" : undefined}
                   className="flex h-16 flex-col items-center justify-center gap-1 select-none"
                 >
-                  {/* Teknik CSS Mask untuk mewarnai ikon SVG */}
+                  {/* Ikon dikunci 24x24, warna via background-color + mask */}
                   <span
                     aria-hidden
                     className="
@@ -65,3 +66,4 @@ export default function BottomNavLembaga({ items = [] as NavItemLembaga[] }) {
     </nav>
   );
 }
+

@@ -16,10 +16,10 @@ export const metadata: Metadata = {
   description: "Platform jejak karbon untuk personal dan organisasi",
   manifest: "/manifest.json",
   icons: {
-    apple: "/icons/apple-180.png", // <— penting untuk iOS
+    apple: "/icons/apple-touch-icon.png", // <— penting untuk iOS
     icon: [
-      { url: "/icons/icon-192.png", sizes: "192x192" },
-      { url: "/icons/icon-512.png", sizes: "512x512" },
+      { url: "/icons/icon-192x192.png", sizes: "192x192" },
+      { url: "/icons/icon-512x512.png", sizes: "512x512" },
     ],
   },
   appleWebApp: {

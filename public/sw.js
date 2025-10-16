@@ -3,7 +3,7 @@ const CACHE = "1000-cahaya-v1";
 const APP_SHELL = [
   "/", "/app", "/offline",
   "/manifest.json",
-  "/icons/icon-192.png", "/icons/icon-512.png", "/icons/maskable-512.png", "/icons/apple-180.png"
+  "/icons/icon-192x192.png", "/icons/icon-512x512.png", "/icons/maskable-512x512.png", "/icons/apple-touch-icon.png"
 ];
 
 self.addEventListener("install", (e) => {

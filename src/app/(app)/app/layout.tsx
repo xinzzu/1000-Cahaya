@@ -21,7 +21,7 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
 
   return (
     <div className="min-h-dvh bg-white text-black">
-      <main className="mx-auto max-w-sm px-4 pt-4 pb-[88px]">{children}</main>
+      <main className="mx-auto max-w-lg px-4 pt-4 pb-[88px]">{children}</main>
 
       {/* ⬇️ navbar disembunyikan pada path tertentu */}
       <HideOnPaths paths={HIDE_NAV_PATHS}>

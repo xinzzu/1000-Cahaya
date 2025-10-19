@@ -51,7 +51,7 @@ const leaderboard = [
 
 export default function TantanganPage() {
   return (
-    <main className="mx-auto max-w-sm px-4 pt-2 pb-[88px]">
+    <main className="mx-auto max-w-lg px-4 pt-2 pb-[88px]">
       {/* Headline */}
       <div className="text-center pt-2">
         <h1 className="text-xl font-semibold">Tantangan & Misi</h1>

@@ -31,7 +31,7 @@ export default function ProfilPage() {
 
   return (
     <main className="min-h-dvh bg-white text-black">
-      <div className="mx-auto max-w-sm px-4 pb-[88px] pt-4">
+      <div className="mx-auto max-w-lg px-4 pb-[88px] pt-4">
         <h1 className="mb-3 text-center text-xl font-semibold">Profil</h1>
 
         {/* garis tipis sesuai desain */}

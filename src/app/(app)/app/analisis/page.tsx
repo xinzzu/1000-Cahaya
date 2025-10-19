@@ -62,7 +62,7 @@ export default function AnalisisPage() {
   const changeAbs = 26.5;
 
   return (
-    <main className="mx-auto max-w-sm px-4 pt-4 pb-[88px]">
+    <main className="mx-auto max-w-lg px-4 pt-4 pb-[88px]">
       {/* Header */}
       <header className="text-center">
         <h1 className="text-xl font-semibold">Analisis Jejak Karbon</h1>

@@ -12,7 +12,7 @@ const MOCK: OrgReport[] = [
 export default function RiwayatPage() {
   return (
     <main className="min-h-dvh text-black ">
-      <div className="mx-auto max-w-sm px-4 pb-[60px] pt-4">
+      <div className="mx-auto max-w-lg px-4 pb-[60px] pt-4">
         {/* Header */}
         <div className="text-center">
           <h1 className="text-2xl font-semibold">Riwayat Laporan</h1>

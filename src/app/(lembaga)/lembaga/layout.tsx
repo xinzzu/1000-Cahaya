@@ -41,8 +41,8 @@ export default function LembagaLayout({ children }: { children: React.ReactNode 
   ];
 
   return (
-    <div className="min-h-dvh bg-gray-50 text-black"> {/* Latar belakang abu-abu seperti desain beranda */}
-      <main className="mx-auto max-w-sm px-4 pt-4 pb-[88px]">
+    <div className="min-h-dvh bg-white text-black"> {/* Latar belakang abu-abu seperti desain beranda */}
+      <main className="mx-auto max-w-lg px-4 pt-4 pb-[88px]">
         {children}
       </main>
 

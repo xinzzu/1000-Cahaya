@@ -52,7 +52,7 @@ export default function AnalysisPageLembaga() {
 
   return (
     <main className="min-h-dvh text-black">
-      <div className="mx-auto max-w-sm px-4 pb-[88px] pt-4">
+      <div className="mx-auto max-w-lg px-4 pb-[88px] pt-4">
         {/* Header */}
         <div className="text-center">
           <h1 className="text-2xl font-semibold">Analisis Jejak Karbon</h1>

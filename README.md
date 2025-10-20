@@ -54,59 +54,59 @@ Proyek ini dibagi menjadi dua alur pengguna utama: Individu dan Lembaga, serta h
 ## Arsitektur Proyek
 
 Proyek ini menggunakan **Next.js App Router** yang ditempatkan di dalam direktori `src`. Arsitektur utama dibagi berdasarkan fitur dan alur pengguna menggunakan *Route Groups*.
-src
-├── app/
-│   ├── (app)/                    # Grup Rute untuk Pengguna Individu (setelah login)
-│   │   ├── app/
-│   │   │   ├── analisis/
-│   │   │   ├── catat/
-│   │   │   ├── profile/
-│   │   │   ├── tantangan/
-│   │   │   └── page.tsx          # Dashboard Individu
-│   │   └── layout.tsx            # Layout utama individu (termasuk BottomNav)
-│   │
-│   ├── (lembaga)/                # Grup Rute untuk Pengguna Lembaga (setelah login)
-│   │   ├── lembaga/
-│   │   │   ├── analisis/
-│   │   │   ├── profile/
-│   │   │   ├── riwayat/
-│   │   │   └── page.tsx          # Dashboard Lembaga
-│   │   └── layout.tsx            # Layout utama lembaga (termasuk BottomNav Lembaga)
-│   │
-│   ├── (marketing)/              # Grup Rute untuk Halaman Publik & Otentikasi
-│   │   ├── auth/
-│   │   │   ├── login/
-│   │   │   └── register/
-│   │   ├── complete-profile/
-│   │   ├── onboarding/
-│   │   ├── register-aset/
-│   │   ├── survey/
-│   │   └── page.tsx              # Landing Page Publik
-│   │
-│   ├── activate/                 # Halaman aktivasi akun (di luar grup)
-│   ├── offline/                  # Halaman fallback PWA
-│   ├── globals.css               # Styles global
-│   └── layout.tsx                # Root layout
-│
-├── components/
-│   ├── auth/                     # Komponen terkait otentikasi
-│   ├── individu/                 # Komponen spesifik untuk alur Individu
-│   ├── lembaga/                  # Komponen spesifik untuk alur Lembaga
-│   ├── nav/                      # Komponen navigasi (BottomNavIndividu, BottomNavLembaga)
-│   ├── onboarding/
-│   └── ui/                       # Komponen UI dasar (Button, TextField, Select, dll.)
-│
-├── config/
-│   └── routes.ts                 # Definisi rute aplikasi
-│
-├── styles/
-│   └── token.css                 # Variabel/token styling
-│
-└── public/
-    ├── icons/                    # Ikon untuk PWA (manifest)
-    ├── images/                   # Gambar statis
-    ├── manifest.json             # File manifest PWA
-    └── sw.js                     # Service Worker PWA
+* src
+* ├── app/
+* │   ├── (app)/                    # Grup Rute untuk Pengguna Individu (setelah login)
+* │   │   ├── app/
+* │   │   │   ├── analisis/
+* │   │   │   ├── catat/
+* │   │   │   ├── profile/
+* │   │   │   ├── tantangan/
+* │   │   │   └── page.tsx          # Dashboard Individu
+* │   │   └── layout.tsx            # Layout utama individu (termasuk BottomNav)
+* │   │
+* │   ├── (lembaga)/                # Grup Rute untuk Pengguna Lembaga (setelah login)
+* │   │   ├── lembaga/
+* │   │   │   ├── analisis/
+* │   │   │   ├── profile/
+* │   │   │   ├── riwayat/
+* │   │   │   └── page.tsx          # Dashboard Lembaga
+* │   │   └── layout.tsx            # Layout utama lembaga (termasuk BottomNav Lembaga)
+* │   │
+* │   ├── (marketing)/              # Grup Rute untuk Halaman Publik & Otentikasi
+* │   │   ├── auth/
+* │   │   │   ├── login/
+* │   │   │   └── register/
+* │   │   ├── complete-profile/
+* │   │   ├── onboarding/
+* │   │   ├── register-aset/
+* │   │   ├── survey/
+* │   │   └── page.tsx              # Landing Page Publik
+* │   │
+* │   ├── activate/                 # Halaman aktivasi akun (di luar grup)
+* │   ├── offline/                  # Halaman fallback PWA
+* │   ├── globals.css               # Styles global
+* │   └── layout.tsx                # Root layout
+* │
+* ├── components/
+* │   ├── auth/                     # Komponen terkait otentikasi
+* │   ├── individu/                 # Komponen spesifik untuk alur Individu
+* │   ├── lembaga/                  # Komponen spesifik untuk alur Lembaga
+* │   ├── nav/                      # Komponen navigasi (BottomNavIndividu, BottomNavLembaga)
+* │   ├── onboarding/
+* │   └── ui/                       # Komponen UI dasar (Button, TextField, Select, dll.)
+* │
+* ├── config/
+* │   └── routes.ts                 # Definisi rute aplikasi
+* │
+* ├── styles/
+* │   └── token.css                 # Variabel/token styling
+* │
+* └── public/
+*     ├── icons/                    # Ikon untuk PWA (manifest)
+*     ├── images/                   # Gambar statis
+*     └── sw.js                     # Service Worker PWA
+*     ├── manifest.json             # File manifest PWA
 ## Memulai Proyek
 
 Pertama, instal dependensi:
